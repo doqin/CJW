@@ -25,6 +25,7 @@ WORKDIR /app
 COPY --from=builder /app/app/build/libs/*.jar app.jar
 
 EXPOSE 8080
+EXPOSE 42069
 
 ENV JAVA_OPTS="-Xms256m -Xmx512m"
 
