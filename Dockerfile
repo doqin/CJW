@@ -3,29 +3,29 @@ FROM gradle:8.5-jdk21 AS builder
 
 WORKDIR /app
 
-# Copy only build files for caching
-COPY app/build.gradle app/settings.gradle ./app/
-COPY gradle ./gradle
+# Copy Gradle wrapper and config files
 COPY gradlew gradlew.bat gradle.properties ./
+COPY gradle ./gradle
 
-# Copy the actual source
-COPY app/src ./app/src
+# Copy root project files
+COPY settings.gradle ./
 
-# Run build inside the app folder
-WORKDIR /app/app
-RUN ../gradlew clean build --no-daemon
+# Copy the actual app module
+COPY app ./app
+
+# Build the project
+RUN ./gradlew :app:build --no-daemon
 
 # --- Runtime Stage ---
 FROM eclipse-temurin:21-jdk-alpine
 
 WORKDIR /app
 
-# Copy the generated JAR from build stage
+# Copy the built JAR from the build stage
 COPY --from=builder /app/app/build/libs/*.jar app.jar
 
-EXPOSE 6969
+EXPOSE 8080
 
-# Optional: fine-tune memory usage for Render
 ENV JAVA_OPTS="-Xms256m -Xmx512m"
 
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
