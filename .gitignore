@@ -8,3 +8,4 @@ build
 .kotlin
 .settings
 .vscode
+*.env
