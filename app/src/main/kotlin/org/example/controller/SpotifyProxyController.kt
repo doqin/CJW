@@ -24,7 +24,7 @@ class SpotifyProxyController {
 
     private val dotenv = dotenv{
         directory = System.getProperty("user.dir")
-        // ignoreIfMissing = false
+        ignoreIfMissing = true
     }
 
     private val clientId: String = System.getenv("SPOTIFY_CLIENT_ID") ?: dotenv["SPOTIFY_CLIENT_ID"]
