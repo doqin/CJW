@@ -2,10 +2,15 @@
 <html xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <title>CJW</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
 </head>
 <body>
-    <h1>Skibidi</h1>
-    <h2 id="status">Loading...</h2>
-    <script src="/getStatus.js"></script>
+    <h1>CJW</h1>
+    <h3>Crappy Java WebApp</h3>
+    <p id="status">Loading...</p>
+    <img id="cat" th:src="@{/images/catstare.png}" src="../static/images/catstare.png" alt="catstare" width="10%"
+         style="position: absolute; top: 20px; left: 20px;"/>
+    <script src="/js/getStatus.js"></script>
+    <script src="/js/catChase.js"></script>
 </body>
 </html>

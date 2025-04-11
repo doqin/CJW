@@ -1,0 +1,18 @@
+h1 {
+    color: brown;
+    text-align: center;
+    font-family: "Times New Roman", serif;
+}
+
+h3 {
+    color: darkgrey;
+    text-align: center;
+}
+
+body {
+    font-family: Arial, serif;
+}
+
+p {
+    margin-left: 5%;
+}

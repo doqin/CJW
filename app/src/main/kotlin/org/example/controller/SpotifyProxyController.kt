@@ -82,7 +82,8 @@ class SpotifyProxyController {
         val artist = artistArray.joinToString(", ") {
             it.jsonObject["name"]?.jsonPrimitive?.content ?: "Unknown Artist"
         }
+        val link = item?.get("id")?.jsonPrimitive?.contentOrNull ?: ""
 
-        return@runBlocking ResponseEntity.ok(mapOf("track" to name, "artist" to artist))
+        return@runBlocking ResponseEntity.ok(mapOf("track" to name, "artist" to artist, "link" to link))
     }
 }
