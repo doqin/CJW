@@ -24,8 +24,7 @@ WORKDIR /app
 # Copy the built JAR from the build stage
 COPY --from=builder /app/app/build/libs/*.jar app.jar
 
-EXPOSE 8080
-EXPOSE 42069
+EXPOSE 6969
 
 ENV JAVA_OPTS="-Xms256m -Xmx512m"
 

@@ -27,10 +27,13 @@ dependencies {
     // This dependency is used by the application.
     implementation libs.guava
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "org.jetbrains.kotlin:kotlin-reflect"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin"
     implementation "org.springframework.boot:spring-boot-starter-web" // REST API
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf" // Server-side rendering
     implementation "org.springframework.boot:spring-boot-starter-data-jpa" // DB ORM
     runtimeOnly "com.h2database:h2"
+    runtimeOnly "org.springframework.boot:spring-boot-devtools"
     implementation "io.github.cdimascio:dotenv-kotlin:6.4.1"
     implementation "io.ktor:ktor-server-core:2.3.7"
     implementation "io.ktor:ktor-server-netty:2.3.7"
