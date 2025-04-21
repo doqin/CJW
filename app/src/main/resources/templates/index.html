@@ -7,17 +7,61 @@
 </head>
 
 <body>
-  <h1>CJW</h1>
-  <h3>Crappy Java WebApp</h3>
-  <button id="catButton" 
-      onclick="initChase()" 
-      style="position: absolute;
-            top: 20px;
-            right: 20px;"
-    >cat?</button>
-  <p id="status">Loading...</p>
-  <div id="canvas"</div>
+  <div class="header">
+    <h1>CJW</h1>
+    <p>Crappy Java WebApp</p>
+  </div>
+  <div id="canvas" style="padding: 30px;">
+    <p id="status" style="font-size: 30px;">
+      Loading...
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis nibh sit amet scelerisque interdum. Nulla
+      egestas, neque in ultrices aliquet, sapien augue condimentum nibh, quis lacinia neque ipsum vitae mauris. Donec
+      lobortis risus est, id rutrum velit sagittis quis. Ut semper lacus ut enim suscipit porttitor. Morbi sit amet
+      tincidunt justo. Cras vel lacus leo. Aenean nec finibus lectus. Aliquam vulputate leo ac tristique imperdiet. Cras
+      malesuada tellus sit amet porta imperdiet. Nunc pellentesque libero in dui elementum dignissim. Nunc eget risus
+      scelerisque, posuere urna id, imperdiet ex. Sed vitae mattis lacus, sed vehicula nibh.<br><br>
+
+      In sodales velit sed condimentum euismod. Maecenas pretium tincidunt magna sit amet tempor. Maecenas odio massa,
+      consequat ut turpis at, vestibulum iaculis diam. Aenean eget mauris nunc. Nam id tortor elementum, imperdiet metus
+      ut, consectetur justo. Vivamus odio enim, tempus id suscipit non, sodales a erat. Maecenas fringilla mi in viverra
+      vulputate. Suspendisse potenti. In in aliquet purus, quis fringilla augue. Integer posuere rutrum tortor, volutpat
+      eleifend diam varius in. Maecenas dignissim convallis molestie. Vivamus orci libero, dignissim quis tincidunt
+      ornare, placerat eu dui. Ut a lacus ante.<br><br>
+
+      In sagittis metus vel lorem mattis, vitae accumsan enim blandit. Curabitur ultricies eros sit amet rutrum
+      vehicula. Integer vitae neque neque. Sed id tristique sem. Etiam et facilisis dui. Praesent ullamcorper erat
+      vestibulum, blandit ligula pulvinar, tincidunt dolor. Donec bibendum neque eros, luctus vulputate magna aliquet
+      sed.<br><br>
+
+      Nullam massa tortor, laoreet quis diam sit amet, varius ultricies tellus. Pellentesque leo justo, tristique id
+      tristique eu, auctor ac lacus. Pellentesque ac risus risus. Aenean eu risus non lacus vestibulum auctor. Nunc
+      vitae lectus in odio maximus cursus id in neque. Maecenas elementum libero lorem, vitae fringilla ipsum malesuada
+      in. Duis lacinia ex ante. Donec lacinia libero sapien, eu aliquet magna aliquet molestie. Fusce ut mauris vitae
+      massa tristique tristique. Suspendisse interdum sit amet leo vitae accumsan. Nam feugiat quis tortor ac
+      malesuada.<br><br>
+
+      Vivamus placerat egestas mi, nec egestas orci aliquam nec. Interdum et malesuada fames ac ante ipsum primis in
+      faucibus. Curabitur ut convallis augue. Quisque feugiat imperdiet tortor ac dapibus. Suspendisse gravida tincidunt
+      tellus consequat eleifend. Aenean tincidunt ultrices imperdiet. Fusce maximus magna a est faucibus facilisis.
+      Mauris in lorem volutpat orci bibendum mattis a eget lacus. Aliquam maximus congue ligula sed interdum. Morbi
+      consectetur metus id placerat sodales. Etiam commodo blandit sem, ut congue lacus gravida in. Aliquam interdum
+      nisi eget interdum blandit.<br><br>
+    </p>
+  </div>
+  <div class="footer">
+    <p>
+      contact:
+      <a href="mailto:personal.azalea@gmail.com">personal.azalea@gmail.com</a>
+      <button id="catButton" onclick="initChase()" style="
+            position: absolute;
+            right: 20px;">cat?</button>
+
+    </p>
+  </div>
   <script src="/js/getStatus.js"></script>
   <script src="/js/catChase.js"></script>
 </body>
+
 </html>

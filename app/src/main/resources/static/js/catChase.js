@@ -10,6 +10,7 @@ document.addEventListener('mousemove', function(event) {
   mouseY = event.clientY;
 });
 
+// Cat chase function
 function catChase() {
   let cat = document.querySelector("#cat");
   let catX = parseFloat(cat.style.left.replace("px", "")) + cat.clientWidth / 2;
@@ -49,4 +50,3 @@ function initChase() {
   document.getElementById('catButton').hidden = true;
   chaseInterval = setInterval(catChase, interval);
 }
-

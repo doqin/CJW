@@ -1,18 +1,40 @@
 h1 {
-    color: brown;
-    text-align: center;
-    font-family: "Times New Roman", serif;
+  text-align: center;
 }
 
 h3 {
-    color: darkgrey;
-    text-align: center;
+  color: darkgrey;
+  text-align: center;
 }
 
 body {
-    font-family: Arial, serif;
+  font-family: georgia, serif;
+  background-color: white;
 }
 
-p {
-    margin-left: 5%;
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #294D4A;
+  color: white;
+  text-align: center;
+}
+
+button {
+  font-family: georrgia, serif;
+  font-size: 15px;
+  border: none;
+  background-color: #fea82f;
+  display: inline-block;
+  color: black;
+}
+
+.header {
+  padding: 15px;
+  text-align: center;
+  background: #294D4A;
+  color: white;
+  font-size: 15px;
 }
