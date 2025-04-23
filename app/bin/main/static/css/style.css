@@ -1,31 +1,23 @@
 h1 {
-    text-align: center;
-}
-
-h3 {
-    color: darkgrey;
-    text-align: center;
-}
-
-body {
-    font-family: georgia, serif;
-    background-color: #A799B7;
-}
-
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: #294D4A;
-  color: white;
   text-align: center;
 }
 
+h3 {
+  color: darkgrey;
+  text-align: center;
+}
+
+body {
+  left: 0;
+  font-family: georgia, serif;
+  background-color: white;
+}
+
 button {
+  font-family: georrgia, serif;
+  font-size: 15px;
   border: none;
   background-color: #fea82f;
-  text-decoration: none;
   display: inline-block;
   color: black;
 }
@@ -38,6 +30,18 @@ button {
   font-size: 15px;
 }
 
-a:link {
-  color: grey;
+.footer {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  background-color: #294D4A;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  align-content: center;
+}
+
+.footer a:link {
+  color: white;
 }

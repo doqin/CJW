@@ -6,8 +6,8 @@ const interval = 1000 / fps;
 let chaseInterval;
 document.addEventListener('mousemove', function(event) {
   // console.log('Mouse X:', event.clientX, 'Mouse Y:', event.clientX);
-  mouseX = event.clientX;
-  mouseY = event.clientY;
+  mouseX = event.pageX;
+  mouseY = event.pageY;
 });
 
 // Cat chase function

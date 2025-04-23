@@ -8,18 +8,9 @@ h3 {
 }
 
 body {
+  left: 0px;
   font-family: georgia, serif;
   background-color: white;
-}
-
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: #294D4A;
-  color: white;
-  text-align: center;
 }
 
 button {
@@ -27,7 +18,6 @@ button {
   font-size: 15px;
   border: none;
   background-color: #fea82f;
-  display: inline-block;
   color: black;
 }
 
@@ -37,4 +27,20 @@ button {
   background: #294D4A;
   color: white;
   font-size: 15px;
+}
+
+.footer {
+  position: fixed;
+  width: 100%;
+  left: 0px;
+  bottom: 0px;
+  background-color: #294D4A;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  align-content: center;
+}
+
+.footer a:link {
+  color: white;
 }

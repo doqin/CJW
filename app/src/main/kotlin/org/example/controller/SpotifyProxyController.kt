@@ -66,24 +66,30 @@ class SpotifyProxyController {
 //    private val restTemplate = RestTemplate()
 
     @GetMapping("/currently-playing")
-    fun getCurrentlyPlaying(): ResponseEntity<Map<String, String>> =
-        runBlocking {
+    fun getCurrentlyPlaying(): ResponseEntity<Map<String, String>>
+        {
             val token =
                 refreshAccessToken()
-                    ?: return@runBlocking ResponseEntity.status(401).body(mapOf("error" to "Unauthorized"))
+                    ?: return ResponseEntity.status(401).body(mapOf("error" to "Unauthorized"))
 
-            val response =
-                httpClient.get("https://api.spotify.com/v1/me/player/currently-playing") {
-                    headers {
-                        append(HttpHeaders.Authorization, "Bearer $token")
+            val response = runCatching {
+                runBlocking {
+                    httpClient.get("https://api.spotify.com/v1/me/player/currently-playing") {
+                        headers {
+                            append(HttpHeaders.Authorization, "Bearer $token")
+                        }
                     }
                 }
-
-            if (response.status == HttpStatusCode.NoContent) {
-                return@runBlocking ResponseEntity.ok(mapOf("track" to "Nothing playing", "artist" to "N/A"))
+            }.getOrElse {
+                return ResponseEntity.status(500).body(mapOf("error" to "Failed to fetch from Spotify"))
             }
 
-            val json = Json.parseToJsonElement(response.bodyAsText()).jsonObject
+            if (response.status == HttpStatusCode.NoContent) {
+                return ResponseEntity.ok(mapOf("track" to "Nothing playing", "artist" to "N/A"))
+            }
+
+            val responseText = runBlocking { response.bodyAsText() }
+            val json = Json.parseToJsonElement(responseText).jsonObject
             val item = json["item"]?.jsonObject
             val name = item?.get("name")?.jsonPrimitive?.contentOrNull ?: "Nothing playing"
             val artistArray = item?.get("artists")?.jsonArray ?: JsonArray(emptyList())
@@ -93,6 +99,6 @@ class SpotifyProxyController {
                 }
             val link = item?.get("id")?.jsonPrimitive?.contentOrNull ?: ""
 
-            return@runBlocking ResponseEntity.ok(mapOf("track" to name, "artist" to artist, "link" to link))
+            return ResponseEntity.ok(mapOf("track" to name, "artist" to artist, "link" to link))
         }
 }
