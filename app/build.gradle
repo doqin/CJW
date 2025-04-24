@@ -26,6 +26,7 @@ dependencies {
 
     // This dependency is used by the application.
     implementation libs.guava
+    implementation 'org.json:json:20231013'
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "org.jetbrains.kotlin:kotlin-reflect"
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin"
