@@ -19,4 +19,9 @@ public class PageController {
   public String showRPSPage() {
     return "rps";
   }
+
+  @GetMapping("/val")
+    public String showValFetcherPage() {
+        return "val";
+    }
 }

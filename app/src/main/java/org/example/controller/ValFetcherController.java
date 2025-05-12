@@ -27,22 +27,52 @@ public class ValFetcherController {
     private static final String VAL_TAG = dotenv.get("VAL_TAG");
 
     @GetMapping("/val-fetcher")
-    public static ResponseEntity<Map<String, String>> requestInfoAccess() {
+    public static ResponseEntity<Map<Object, String>> requestInfoAccess() {
+//        System.out.println("Fetching VALORANT data...");
         try {
-            String urlString = String.format("https://api.henrikdev.xyz/valorant/v1/account/%s/%s/", VAL_NAME, VAL_TAG);
-            URL url = new URL(urlString);
+            HttpURLConnection connection;
+            int responseCode = 0;
+//            URL url = new URL(String.format("https://api.henrikdev.xyz/valorant/v2/account/%s/%s/", VAL_NAME, VAL_TAG));
+//
+//            connection = (HttpURLConnection) url.openConnection();
+//            connection.setRequestMethod("GET");
+//
+//            connection.setRequestProperty("Authorization", VAL_API_KEY);
+//            connection.setRequestProperty("Accept", "*/*");
 
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            int account_level = 0;
+            String currenttierpatched = null;
+            String patched_tier = null;
+
+//            responseCode = connection.getResponseCode();
+//            if (responseCode == 200) {
+//                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//                StringBuilder response = new StringBuilder();
+//                String line;
+//                while ((line = reader.readLine()) != null) {
+//                    response.append(line);
+//                }
+//                reader.close();
+//
+//                JSONObject object = new JSONObject(response.toString());
+//                JSONObject data = object.getJSONObject("data");
+//                System.out.println("fetch");
+//                account_level = data.getInt("account_level");
+//            } else {
+//                System.out.println("Error getting info from API: " + responseCode);
+//            }
+//
+//            connection.disconnect();
+
+            URL url2 = new URL(String.format("https://api.henrikdev.xyz/valorant/v2/mmr/%s/%s/%s", VAL_REGION, VAL_NAME, VAL_TAG));
+
+            connection = (HttpURLConnection) url2.openConnection();
             connection.setRequestMethod("GET");
 
             connection.setRequestProperty("Authorization", VAL_API_KEY);
             connection.setRequestProperty("Accept", "*/*");
 
-            JSONObject account_level = null;
-            JSONObject currenttier_patched = null;
-            JSONObject patched_tier = null;
-
-            int responseCode = connection.getResponseCode();
+            responseCode = connection.getResponseCode();
             if (responseCode == 200) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder response = new StringBuilder();
@@ -53,48 +83,21 @@ public class ValFetcherController {
                 reader.close();
 
                 JSONObject object = new JSONObject(response.toString());
-                JSONArray data = object.getJSONArray("data");
-                account_level = data.getJSONObject(2);
+                JSONObject data = object.getJSONObject("data");
+                JSONObject current_data = data.getJSONObject("current_data");
+                //System.out.println(current_data.toString());
+                currenttierpatched = current_data.getString("currenttierpatched");
+                JSONObject highest_rank = data.getJSONObject("highest_rank");
+                patched_tier = highest_rank.getString("patched_tier");
 //            } else {
 //                System.out.println("Error getting info from API: " + responseCode);
             }
 
             connection.disconnect();
 
-            String urlString2 = String.format("https://api.henrikdev.xyz/valorant/v2/mmr/%s/%s/%s", VAL_REGION, VAL_NAME, VAL_TAG);
-            URL url2 = new URL(urlString2);
-
-            HttpURLConnection connection2 = (HttpURLConnection) url2.openConnection();
-            connection2.setRequestMethod("GET");
-
-            connection2.setRequestProperty("Authorization", VAL_API_KEY);
-            connection2.setRequestProperty("Accept", "*/*");
-
-            responseCode = connection2.getResponseCode();
-            if (responseCode == 200) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection2.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-                reader.close();
-
-                JSONObject object = new JSONObject(response.toString());
-                JSONArray data = object.getJSONArray("data");
-                JSONObject current_data = data.getJSONObject(2);
-                currenttier_patched = current_data.getJSONObject("currenttier_patched");
-                JSONObject highest_rank = data.getJSONObject(3);
-                patched_tier = highest_rank.getJSONObject("patched_tier");
-//            } else {
-//                System.out.println("Error getting info from API: " + responseCode);
-            }
-
-            connection2.disconnect();
-
-            Map<String, String> responseMap = new HashMap<>();
-            responseMap.put("account_level", (account_level != null)?account_level.toString():null);
-            responseMap.put("currenttier_patched", (currenttier_patched != null)?currenttier_patched.toString():null);
+            Map<Object, String> responseMap = new HashMap<>();
+            //responseMap.put("account_level", (account_level != 0)?String.format("%d", account_level):null);
+            responseMap.put("currenttierpatched", (currenttierpatched != null)? currenttierpatched.toString():null);
             responseMap.put("patched_tier", (patched_tier != null)?patched_tier.toString():null);
 
             return ResponseEntity.ok(responseMap);
