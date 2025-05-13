@@ -8,7 +8,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import org.json.*;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -31,11 +31,11 @@ public class ValFetcherController {
 //        System.out.println("Fetching VALORANT data...");
         try {
             HttpURLConnection connection;
-            int responseCode = 0;
+            int responseCode;
             Map<Object, String> responseMap = new HashMap<>();
-//            URL url = new URL(String.format("https://api.henrikdev.xyz/valorant/v2/account/%s/%s/", VAL_NAME, VAL_TAG));
+//            URI uri1 = new URI(String.format("https://api.henrikdev.xyz/valorant/v2/account/%s/%s/", VAL_NAME, VAL_TAG));
 //
-//            connection = (HttpURLConnection) url.openConnection();
+//            connection = (HttpURLConnection) uri1.toURL().openConnection();
 //            connection.setRequestMethod("GET");
 //
 //            connection.setRequestProperty("Authorization", VAL_API_KEY);
@@ -44,6 +44,7 @@ public class ValFetcherController {
 //            int account_level = 0;
             String currenttierpatched = null;
             String patched_tier = null;
+            String currentimg_small = null;
 
 //            responseCode = connection.getResponseCode();
 //            responseMap.put("response_code_1", String.valueOf(responseCode));
@@ -67,9 +68,9 @@ public class ValFetcherController {
 //
 //            connection.disconnect();
 
-            URL url2 = new URL(String.format("https://api.henrikdev.xyz/valorant/v2/mmr/%s/%s/%s", VAL_REGION, VAL_NAME, VAL_TAG));
+            URI uri2 = new URI(String.format("https://api.henrikdev.xyz/valorant/v2/mmr/%s/%s/%s", VAL_REGION, VAL_NAME, VAL_TAG));
 
-            connection = (HttpURLConnection) url2.openConnection();
+            connection = (HttpURLConnection) uri2.toURL().openConnection();
             connection.setRequestMethod("GET");
 
             connection.setRequestProperty("Authorization", VAL_API_KEY);
@@ -90,8 +91,11 @@ public class ValFetcherController {
                 JSONObject object = new JSONObject(response.toString());
                 JSONObject data = object.getJSONObject("data");
                 JSONObject current_data = data.getJSONObject("current_data");
-                //System.out.println(current_data.toString());
+//                System.out.println(current_data.toString());
                 currenttierpatched = current_data.getString("currenttierpatched");
+                JSONObject images = current_data.getJSONObject("images");
+                currentimg_small = images.getString("small");
+                System.out.println(currentimg_small);
                 JSONObject highest_rank = data.getJSONObject("highest_rank");
                 patched_tier = highest_rank.getString("patched_tier");
 //            } else {
@@ -100,9 +104,13 @@ public class ValFetcherController {
 
             connection.disconnect();
 
+            responseMap.put("region", VAL_REGION);
+            responseMap.put("name", VAL_NAME);
+            responseMap.put("tag", VAL_TAG);
 //            responseMap.put("account_level", (account_level != 0)?String.format("%d", account_level):null);
-            responseMap.put("currenttierpatched", (currenttierpatched != null)? currenttierpatched.toString():null);
-            responseMap.put("patched_tier", (patched_tier != null)?patched_tier.toString():null);
+            responseMap.put("currenttierpatched", currenttierpatched);
+            responseMap.put("currentimg_small", currentimg_small);
+            responseMap.put("patched_tier", patched_tier);
 
             return ResponseEntity.ok(responseMap);
 
