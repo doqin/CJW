@@ -95,7 +95,7 @@ public class ValFetcherController {
                 currenttierpatched = current_data.getString("currenttierpatched");
                 JSONObject images = current_data.getJSONObject("images");
                 currentimg_small = images.getString("small");
-                System.out.println(currentimg_small);
+//                System.out.println(currentimg_small);
                 JSONObject highest_rank = data.getJSONObject("highest_rank");
                 patched_tier = highest_rank.getString("patched_tier");
 //            } else {

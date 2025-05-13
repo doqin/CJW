@@ -20,7 +20,32 @@ async function getlink() {
         document.getElementById('status').innerText = "Error fetching data";
         return;
     }
-    let p = document.getElementById('current_rank');
+    let p = document.getElementById('player_info');
+    p.innerText = `Player: ${data.name}#${data.tag}\n`;
+    switch (data.region) {
+        case "ap":
+            p.innerText += "Region: Asia Pacific\n";
+            break;
+        case "na":
+            p.innerText += "Region: North America\n";
+            break;
+        case "eu":
+            p.innerText += "Region: Europe\n";
+            break;
+        case "kr":
+            p.innerText += "Region: Korea\n";
+            break;
+        case "latam":
+            p.innerText += "Region: Latin America\n";
+            break;
+        case "br":
+            p.innerText += "Region: Brazil\n";
+            break;
+        default:
+            p.innerText += `Region: ${data.region}\n`;
+    }
+
+    p = document.getElementById('current_rank');
     // p.innerText = `Account level: ${data.account_level}\n`;
     p.innerText = `Current rank: ${data.currenttierpatched}\n`;
 
