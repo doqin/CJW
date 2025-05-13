@@ -32,6 +32,7 @@ public class ValFetcherController {
         try {
             HttpURLConnection connection;
             int responseCode = 0;
+            Map<Object, String> responseMap = new HashMap<>();
 //            URL url = new URL(String.format("https://api.henrikdev.xyz/valorant/v2/account/%s/%s/", VAL_NAME, VAL_TAG));
 //
 //            connection = (HttpURLConnection) url.openConnection();
@@ -39,12 +40,14 @@ public class ValFetcherController {
 //
 //            connection.setRequestProperty("Authorization", VAL_API_KEY);
 //            connection.setRequestProperty("Accept", "*/*");
-
+//
 //            int account_level = 0;
             String currenttierpatched = null;
             String patched_tier = null;
 
 //            responseCode = connection.getResponseCode();
+//            responseMap.put("response_code_1", String.valueOf(responseCode));
+//
 //            if (responseCode == 200) {
 //                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 //                StringBuilder response = new StringBuilder();
@@ -73,6 +76,8 @@ public class ValFetcherController {
             connection.setRequestProperty("Accept", "*/*");
 
             responseCode = connection.getResponseCode();
+            responseMap.put("response_code_2", String.valueOf(responseCode));
+
             if (responseCode == 200) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder response = new StringBuilder();
@@ -95,8 +100,7 @@ public class ValFetcherController {
 
             connection.disconnect();
 
-            Map<Object, String> responseMap = new HashMap<>();
-            //responseMap.put("account_level", (account_level != 0)?String.format("%d", account_level):null);
+//            responseMap.put("account_level", (account_level != 0)?String.format("%d", account_level):null);
             responseMap.put("currenttierpatched", (currenttierpatched != null)? currenttierpatched.toString():null);
             responseMap.put("patched_tier", (patched_tier != null)?patched_tier.toString():null);
 
